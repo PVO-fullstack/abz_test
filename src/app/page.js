@@ -9,7 +9,7 @@ import { getPosition } from "@/utils/user";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [positions, setPositions] = useState();
+  const [positions, setPositions] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -27,7 +27,7 @@ export default function Home() {
         <div className={styles.conteiner}>
           <Hero />
           <OurUsers />
-          <PostForm positions={positions} />
+          {positions?.length > 0 && <PostForm positions={positions} />}
         </div>
       </div>
     </main>
