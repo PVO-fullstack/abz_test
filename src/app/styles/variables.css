@@ -1,0 +1,11 @@
+:root {
+  --font-heading-size: 40px;
+  --font-text-size: 16px;
+  --line-height-heading: 40px;
+  --line-height-text: 26px;
+  --font-color: #000000de;
+  --primary-color: #f4e041;
+  --secondary-color: #00bdd3;
+  --bg-color: #f8f8f8;
+  --cadr-color: #ffffff;
+}

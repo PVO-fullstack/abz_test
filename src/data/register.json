@@ -1,0 +1,21 @@
+{
+    "name": {
+        "errorMessages": {
+            "required": "string - minLength: 2 - maxLength: 60",
+            "minLength": "minLength: 2",
+            "maxLength": "maxLength: 60"
+        }
+    },
+    "email": {
+        "errorMessages": {
+            "required": "string - minLength: 2 - maxLength: 100",
+            "minLength": "minLength: 2",
+            "maxLength": "maxLength: 100"
+        }
+    },
+    "phone": {
+        "errorMessages": {
+            "required": "string - look example. Can be 11 number"
+        }
+    }
+}

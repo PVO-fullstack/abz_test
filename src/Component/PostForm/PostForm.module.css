@@ -1,0 +1,29 @@
+.form {
+  width: 100%;
+}
+
+.inputs_conteiner {
+  display: flex;
+  flex-direction: column;
+  gap: 54px;
+}
+
+.radio_list {
+  margin-block: 20px;
+}
+
+.file_input {
+  margin-block: 30px;
+}
+
+.submit {
+  display: block;
+  margin-bottom: 70px;
+  margin-inline: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .form {
+    width: 380px;
+  }
+}

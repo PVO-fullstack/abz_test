@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: var(--font-text-size);
+  line-height: var(--line-height-text);
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  max-width: 1170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+}
