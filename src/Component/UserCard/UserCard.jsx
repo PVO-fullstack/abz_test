@@ -14,10 +14,11 @@ export const UserCard = ({ user }) => {
         height={100}
         alt={`photo ${name}`}
       />
-      <p>{name}</p>
+      <p className={styles.name}>{name}</p>
       <div className={styles.description}>
         <p>{position}</p>
-        <p>{email}</p>
+        <p className={styles.email}>{email}</p>
+        <p className={styles.email_absolute}>{email}</p>
         <p>{phone}</p>
       </div>
     </li>

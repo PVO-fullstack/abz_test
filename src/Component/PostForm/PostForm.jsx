@@ -1,18 +1,26 @@
 "use client";
 
-import React, { use, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./PostForm.module.css";
 import { Section } from "../Section/Section";
 import { Input } from "../Input/Input";
-import { sign_in } from "@/utils/user";
+import { getPosition, sign_in } from "@/utils/user";
 import { Button } from "../Button/Button";
 import { Controller, useForm } from "react-hook-form";
 import registerData from "@/data/register.json";
 import { Success } from "../Success/Success";
 
-export const PostForm = ({ positions }) => {
+export const PostForm = () => {
   const [noFile, setNoFile] = useState();
   const [success, setSuccess] = useState(false);
+  const [positions, setPositions] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const get = await getPosition();
+      setPositions(get);
+    })();
+  }, []);
 
   const { name, email, phone } = registerData;
 
