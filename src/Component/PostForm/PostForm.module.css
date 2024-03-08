@@ -5,7 +5,7 @@
 .inputs_conteiner {
   display: flex;
   flex-direction: column;
-  gap: 54px;
+  gap: 30px;
 }
 
 .radio_list {

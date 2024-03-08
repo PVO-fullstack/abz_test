@@ -1,8 +1,20 @@
-import React from "react";
-import { Button } from "../Button/Button";
+import React, { useEffect } from "react";
 import styles from "./Hero.module.css";
+import { Link, Events, animateScroll as scroll, scrollSpy } from "react-scroll";
 
 export const Hero = () => {
+  useEffect(() => {
+    Events.scrollEvent.register("begin", function (to, element) {});
+
+    Events.scrollEvent.register("end", function (to, element) {});
+
+    scrollSpy.update();
+    return () => {
+      Events.scrollEvent.remove("begin");
+      Events.scrollEvent.remove("end");
+    };
+  }, []);
+
   return (
     <div className={styles.conteiner}>
       <div className={styles.hero}>
@@ -16,9 +28,15 @@ export const Hero = () => {
           in mind. They should also be excited to learn, as the world of
           Front-End Development keeps evolving.
         </p>
-        <a className={styles.btn} href="#post">
+        <Link
+          className={styles.btn}
+          href="/"
+          to="post"
+          smooth={true}
+          duration={1000}
+        >
           <p className={styles.text}>Sing up</p>
-        </a>
+        </Link>
       </div>
     </div>
   );

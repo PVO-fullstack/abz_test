@@ -1,18 +1,40 @@
-import React from "react";
-import { Button } from "../Button/Button";
+import React, { useEffect } from "react";
 import styles from "./UserMenu.module.css";
-import { sign_up } from "@/utils/user";
-import Link from "next/link";
+import { Link, Events, animateScroll as scroll, scrollSpy } from "react-scroll";
 
 export const UserMenu = () => {
+  useEffect(() => {
+    Events.scrollEvent.register("begin", function (to, element) {});
+
+    Events.scrollEvent.register("end", function (to, element) {});
+
+    scrollSpy.update();
+    return () => {
+      Events.scrollEvent.remove("begin");
+      Events.scrollEvent.remove("end");
+    };
+  }, []);
+
   return (
     <div className={styles.btn_conteiner}>
-      <a className={styles.btn} href="#users">
+      <Link
+        className={styles.btn}
+        href="/"
+        to="users"
+        smooth={true}
+        duration={1000}
+      >
         Users
-      </a>
-      <a className={styles.btn} href="#post">
+      </Link>
+      <Link
+        className={styles.btn}
+        href="/"
+        to="post"
+        smooth={true}
+        duration={1000}
+      >
         Sing up
-      </a>
+      </Link>
     </div>
   );
 };
