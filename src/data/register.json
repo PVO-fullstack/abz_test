@@ -8,7 +8,7 @@
     },
     "email": {
         "errorMessages": {
-            "required": "string - minLength: 2 - maxLength: 100",
+            "required": "minLength: 2 - maxLength: 100",
             "minLength": "minLength: 2",
             "maxLength": "maxLength: 100"
         }

@@ -28,6 +28,7 @@ export const Input = ({
       value: 60,
       message: errorMessages?.maxLength || "MaxLength 60",
     },
+    pattern: /^[a-zA-Z ]*$/,
   };
 
   const telRegisterValidation = {

@@ -21,7 +21,7 @@ export const sign_in = async (data) => {
 
 export const getUsers = async (page, count) => {
   const res = await instance.get(`/api/v1/users?page=${page}&count=${count}`);
-  const data = res.data.users;
+  const data = res.data;
   return data;
 };
 

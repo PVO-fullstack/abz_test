@@ -11,15 +11,19 @@ export const OurUsers = () => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(6);
+  const [totalPages, setTotalPages] = useState();
 
   useEffect(() => {
     (async () => {
       const get = await getUsers(page, count);
-      setUsers([...users, ...get]);
+      setUsers([...users, ...get.users]);
+      setTotalPages(get.total_pages);
     })();
   }, [page]);
 
   // const users = use(getUsers());
+
+  console.log("page", page, totalPages);
 
   const showMore = () => {
     setPage(page + 1);
@@ -32,12 +36,14 @@ export const OurUsers = () => {
           <UserCard key={user.id} user={user} />
         ))}
       </ul>
-      <Button
-        onClick={showMore}
-        className={styles.btn}
-        type="button"
-        name="Show more"
-      />
+      {page !== totalPages && (
+        <Button
+          onClick={showMore}
+          className={styles.btn}
+          type="button"
+          name="Show more"
+        />
+      )}
     </Section>
   );
 };
