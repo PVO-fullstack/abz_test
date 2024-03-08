@@ -1,7 +1,7 @@
 "use client";
 
 import classNames from "classnames";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Input.module.css";
 
 export const Input = ({
@@ -16,9 +16,8 @@ export const Input = ({
   errors,
   register,
   errorMessages,
+  noFile,
 }) => {
-  const [noFile, setNoFile] = useState(null);
-
   const nameRegisterValidation = {
     required: errorMessages?.required || "Required",
     minLength: {
@@ -54,30 +53,32 @@ export const Input = ({
 
   const positionRegisterValidation = {
     require: true || "Required",
+    validate: {
+      value: (value) => value !== null || "Check position",
+    },
   };
 
   const fileRegisterValidation = {
     require: errorMessages?.required || "Required",
-    // validate: {
-    //   fileType: (file) =>
-    //     file?.type.split("/")[1].toLowerCase() === "jpeg" ||
-    //     file?.type.split("/")[1].toLowerCase() === "jpg" ||
-    //     "The file type should be JPG/JPEG",
+    validate: {
+      fileType: (file) =>
+        file?.type.split("/")[1].toLowerCase() === "jpeg" ||
+        file?.type.split("/")[1].toLowerCase() === "jpg" ||
+        "The file type should be JPG/JPEG",
 
-    //   fileSize: (file) =>
-    //     file?.size / (1024 * 1024) < 5 ||
-    //     "The file size should be less than 5MB",
-    // },
+      fileSize: (file) =>
+        file?.size / (1024 * 1024) < 5 ||
+        "The file size should be less than 5MB",
+    },
   };
 
   const getHandleChange = () => {
     const fn = (event) => {
       if (name === "photo" && event.target.files) {
         const file = event.target.files[0];
-        setNoFile(file.name);
-        // setValue(name, file, {
-        //   shouldValidate: true,
-        // });
+        setValue(name, file, {
+          shouldValidate: true,
+        });
         return;
       }
       setValue(name, event.target.value, {
@@ -118,7 +119,7 @@ export const Input = ({
             (type === "email" && { ...emailRegisterValidation }) ||
             (type === "name" && { ...nameRegisterValidation }) ||
             (type === "file" && { ...fileRegisterValidation }) ||
-            (type === "position_id" && { ...positionRegisterValidation })
+            (type === "radio" && { ...positionRegisterValidation })
         )}
         {...onChangeProps}
         autoComplete="off"
@@ -126,7 +127,9 @@ export const Input = ({
       {type === "file" && noFile === null ? (
         <span className={styles.file_name}>Upload your photo</span>
       ) : (
-        type === "file" && <span className={styles.file_name}>{noFile}</span>
+        type === "file" && (
+          <span className={styles.file_name}>{noFile.name}</span>
+        )
       )}
       {type === "phone" && (
         <span className={styles.phone_example}>+38 (XXX) XXX-XX-XX</span>

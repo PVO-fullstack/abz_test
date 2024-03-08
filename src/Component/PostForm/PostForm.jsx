@@ -31,24 +31,28 @@ export const PostForm = () => {
     reset,
     setValue,
     formState: { errors, isValid },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      photo: null,
+    },
+  });
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
+  const formData = new FormData();
+
+  const onSubmit = async (data) => {
+    const { name, email, phone, position_id, photo } = data;
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("position_id", position_id);
+    formData.append("photo", photo);
+
     await sign_in(formData).then((res) => {
       if (res.status === 201) {
         setSuccess(true);
         reset();
       }
     });
-  };
-
-  const onFileChange = (e) => {
-    if (e.target.files) {
-      const file = e.currentTarget.files[0];
-      setNoFile(file.name);
-    }
   };
 
   const close = () => {
@@ -58,7 +62,11 @@ export const PostForm = () => {
   return (
     <>
       <Section id="post" title={"Working with POST request"}>
-        <form id="form" onSubmit={onSubmit} className={styles.form}>
+        <form
+          id="form"
+          onSubmit={handleSubmit(onSubmit)}
+          className={styles.form}
+        >
           <div className={styles.inputs_conteiner}>
             <Input
               type="name"
@@ -103,18 +111,17 @@ export const PostForm = () => {
             />
           ))}
           <Controller
-            name="file"
+            name="photo"
             control={control}
             render={({ field: { value, onChange } }) => {
               return (
                 <Input
                   className={styles.file_input}
-                  noFile={noFile}
+                  noFile={value}
                   id="file"
                   change={(e) => onChange(e.target.files[0])}
                   type="file"
                   name="photo"
-                  value={value?.filename}
                   setValue={setValue}
                   register={register}
                   errors={errors}
@@ -124,7 +131,7 @@ export const PostForm = () => {
           />
           <Button
             className={styles.submit}
-            disabled={Object.keys(errors).length !== 0}
+            disabled={!isValid}
             type="submit"
             name="Sign Up"
           />

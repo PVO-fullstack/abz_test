@@ -16,7 +16,6 @@ export const OurUsers = () => {
     (async () => {
       const get = await getUsers(page, count);
       setUsers([...users, ...get]);
-      console.log("page", page, get);
     })();
   }, [page]);
 
