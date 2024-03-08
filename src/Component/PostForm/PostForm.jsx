@@ -96,20 +96,23 @@ export const PostForm = () => {
               errorMessages={phone.errorMessages}
             />
           </div>
-          <p className={styles.radio_list}>Select your position</p>
-          {positions.map((position) => (
-            <Input
-              key={position.id}
-              name="position_id"
-              className={styles.radio}
-              type="radio"
-              value={position.id}
-              radio_name={position.name}
-              setValue={setValue}
-              register={register}
-              errors={errors}
-            />
-          ))}
+          <p className={styles.position}>Select your position</p>
+          <ul className={styles.radio_list}>
+            {positions.map((position) => (
+              <li key={position.id}>
+                <Input
+                  name="position_id"
+                  className={styles.radio}
+                  type="radio"
+                  value={position.id}
+                  radio_name={position.name}
+                  setValue={setValue}
+                  register={register}
+                  errors={errors}
+                />
+              </li>
+            ))}
+          </ul>
           <Controller
             name="photo"
             control={control}
