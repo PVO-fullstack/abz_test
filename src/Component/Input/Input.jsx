@@ -35,7 +35,7 @@ export const Input = ({
     required: errorMessages?.required || "Required'",
     pattern: {
       value: /^[\+]{0,1}380([0-9]{9})$/,
-      message: errorMessages?.minLength || "Can be 11 number",
+      message: errorMessages?.minLength || "Can be 12 number",
     },
   };
 

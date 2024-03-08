@@ -10,8 +10,7 @@ import { Controller, useForm } from "react-hook-form";
 import registerData from "@/data/register.json";
 import { Success } from "../Success/Success";
 
-export const PostForm = () => {
-  const [noFile, setNoFile] = useState();
+export const PostForm = ({ newUser }) => {
   const [success, setSuccess] = useState(false);
   const [positions, setPositions] = useState([]);
 
@@ -50,6 +49,7 @@ export const PostForm = () => {
     await sign_in(formData).then((res) => {
       if (res.status === 201) {
         setSuccess(true);
+        newUser();
         reset();
       }
     });

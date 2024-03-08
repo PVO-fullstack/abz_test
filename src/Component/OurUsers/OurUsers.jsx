@@ -7,23 +7,40 @@ import { UserCard } from "../UserCard/UserCard";
 import { Button } from "../Button/Button";
 import { Section } from "../Section/Section";
 
-export const OurUsers = () => {
+export const OurUsers = ({ newUser, change }) => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(6);
   const [totalPages, setTotalPages] = useState();
+  const [first, setFirst] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const get = await getUsers(page, count);
-      setUsers([...users, ...get.users]);
-      setTotalPages(get.total_pages);
-    })();
-  }, [page]);
-
-  // const users = use(getUsers());
-
-  console.log("page", page, totalPages);
+    if (newUser) {
+      setPage(1);
+      (async () => {
+        const get = await getUsers(1, count);
+        const sortedUsers = get.users.sort(
+          (a, b) => b.registration_timestamp - a.registration_timestamp
+        );
+        setUsers(sortedUsers);
+        setTotalPages(get.total_pages);
+      })();
+      setFirst(true);
+      change();
+      return;
+    }
+    if (!first) {
+      (async () => {
+        const get = await getUsers(page, count);
+        const sortedUsers = get.users.sort(
+          (a, b) => b.registration_timestamp - a.registration_timestamp
+        );
+        setUsers([...users, ...sortedUsers]);
+        setTotalPages(get.total_pages);
+      })();
+    }
+    setFirst(false);
+  }, [page, newUser]);
 
   const showMore = () => {
     setPage(page + 1);

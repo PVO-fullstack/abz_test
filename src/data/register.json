@@ -15,7 +15,7 @@
     },
     "phone": {
         "errorMessages": {
-            "required": "string - look example. Can be 11 number"
+            "required": "string - look example. Can be 12 number"
         }
     }
 }
